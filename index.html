@@ -3,119 +3,207 @@
   <head>
     <meta charset = "UFT-8" />
     <meta name = "viewport" content = "width=device-width, initial-scale = 1.0" />
+    <link href = "./blog.css" rel = "stylesheet" type = "text/css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <script src="js/chart/Chart.js"></script>
 
-    <title>Intro</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
-
-    <style>
-        body {
-            background-color: #ffc2c2;
-        }
-
-        img { display: block; margin: 0px auto; }
-
-        .middle {
-            margin-left : 10%;
-            margin-right : 10%;
-            background-color: white;
-        }
-
-        .center {
-            text-align: center;
-            margin-top : 200px;
-            margin-bottom : 200px;
-            font-size : 70px;
-            color : black;
-        }
-
-        .card {
-            margin : 5% 5% 5% 5%;
-            padding : 2.5% 5% 2.5% 5%;
-            border-radius : 25px;
-            text-align : center;
-        }
-
-
-        .grid{
-            display : grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: 500px;
-
-            grid-template-areas:
-                "cat1" "cat2" "cat3";
-            gap : 20px;
-        }
-
-        .col{
-            display : inline-block;
-            margin : 5% 5% 5% 5%;
-            padding : 2.5% 5% 2.5% 5%;
-            border-radius : 25px;
-            background-color: rgb(255, 194, 194, 0.5);
-            text-align : center;
-            background-image: url("data:image/jpeg;base64,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");
-            background-size: cover;
-        }
-    </style>
+    <title>INFO</title>
 </head>
-
+  
 <body>
-    <div class = "middle">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#">Navbar</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </nav>
+  <div class = "content">
+    <h2>WELCOME!</h2>
+    <h3>STUDY CODING BLOG</h3>
+    
+    <div class = "img_sea"></div>
+    <div class = "clickme" onclick="location.href = '#profile'">View</div>
+  </div>
+  <div class = "container">
+    <nav class = "nav">
+      <div id = "navbar">
+        
+        <a href = "#profile">PROFILE</a>
 
-          <div class = "center">
-              SESSION : CSS
+        <a href = "#about">ABOUT</a>
+        
+        <a href = "#skill">SKILL</a>
+        
+        <a href = "#contact">CONTACT</a>
+      </div>
+    </nav>
+
+    <!-- PROFILE -->
+    <section id = "profile">
+      <div class = "sec_title">
+        PROFILE
+      </div>
+      <div class = "profile">
+        <img src="fly.gif">
+      </div>
+      <div class = "profile">
+        <p>
+          국민대학교<br>
+          소프트웨어전공<br>
+          17학번<br>
+          2021 멋쟁이사자처럼 9기
+        </p>
+  
+          <p>
+          10.19<br>
+          O형<br>
+          INTP
+          </p>
+      </div>
+
+    </section>
+
+
+
+
+
+
+
+
+    <!-- ABOUT -->
+    <section id = "about">
+      <div class = "sec_title">
+        ABOUT
+      </div>
+
+      <div class="icon">
+        <img src="cloud.jpg" class="image">
+        <div class="overlay">
+          <div class="text">
+            <h3>호기심</h3>
+            궁금해하는게 많습니다!<br>
+            친해지면 귀찮게 자꾸 물어볼지도 몰라요<br>
           </div>
-
-          <div class = "card">
-              고양이 조아
+        </div>
+      </div>
+      <div class="icon">
+        <img src="cactus.jpg" class="image">
+        <div class="overlay">
+          <div class="text">
+            <h3>집순이</h3>
+            침대 사랑합니다.<br>
+            밥 먹기 빼고 모든 걸 침대에서 하려는 경향이 있습니다<br>
           </div>
-
-          <div class = "card">
-              고양이 사진
-              <img src = "http://www.palnews.co.kr/news/photo/201801/92969_25283_5321.jpg" width = "500px" >
+        </div>
+      </div>
+      <div class="icon">
+        <img src="rainbow.jpg" class="image">
+        <div class="overlay">
+          <div class="text">
+            <h3>즉흥적</h3>
+            계획 짜는 걸 싫어하진 않는데 보통 일을 그때그때 기분따라 하는 편입니다.<br>
+            그래서 하나에 꽂히면 진짜 열심히 해요<br>
           </div>
-
-          <div class = "grid">
-              <div class = "col">
-                  <!--고양이1-->
-              </div>
-              <div class = "col">
-                  <!--고양이2-->
-              </div>
-              <div class = "col">
-                  <!--고양이3-->
-              </div>
+        </div>
+      </div>
 
 
+
+    </section>
+    
+ 
+    <!-- SKILL -->
+    <section id = "skill">
+      <div class = "sec_title">
+        SKILL
+      </div>
+      <div class = "row">
+        <div class = "col">
+      <h3>PROGRAMING</h3><br>
+      <canvas id="myChart" style = "display:inline-block;"></canvas><br>
+      <span class = "chart">희망사항 약 70% 반영</span>
+      <span class = "chart">새로고침을 눌러주세요!</span>
+      <br>
+
+      <h3>TOOL</h3><br>
+
+      <div class = "toolbox">
+        <div class = "container">
+          <img src = 'vscode.png' alt = "vscode" class = "image">
+          <div class = "overlay">
+            <div class = "text">Vscode</div>
           </div>
+        </div>
+
+        <div class = "container">
+          <img src = 'eclipse.png' alt = "eclipse" class = "image">
+          <div class = "overlay">
+            <div class = "text">Eclipse</div>
+          </div>
+        </div>
+
+        <div class = "container">
+          <img src = 'photoshop.png' alt = "photoshop" class = "image">
+          <div class = "overlay">
+            <div class = "text">Photoshop</div>
+          </div>
+        </div>
+
+        <div class = "container">
+          <img src = 'spreadsheet.png' alt = "spread" class = "image">
+          <div class = "overlay">
+            <div class = "text">Spread<br>sheet</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class = "col">
+      <h3>LIKE</h3><br>
+      <ul>
+        <li>협동게임!</li>
+        <p>주로 스팀 게임 잘 합니다! 오버쿡, 돈스타브, Raft 진짜 재밌게 했어요</p>
+        <li>책 읽기</li>
+        <p>거창한 책들은 아니고 그냥 재밌는 책 보는 거 좋아해요.</p>
+        <li>영화보기</li>
+        <p>영화는 코드 잘 맞는 거만 보는 거 좋아해요. 스토리 좋으면 다 좋아하는 것 같아요</p>
+        <li>떡볶이</li>
+        <p>매운 건 싫지만 떡볶이는 먹고 싶어</p>
+        <li>민트초코</li>
+        <p>민 초 조 아<br>코 끝에선 화➰❤️ 입안에선 후➰💚 때론 달콤하게🍫 때론 시큰하게🌿 민트초코가 세상을 지배한다🍦
+          민트는 🔮신성한 허브🌿이고 카카오는 신의🧞‍♂️ 열매🥥이기 때문에 민트초코🌿🍫는 신성함🔮이 두배✌🏻입니다 사악한 자👿들의 입 안👄에 민트초코🌿🍫를 넣으면 뒤집어지는🤪 이유입니다‼️</p>
+        
+      </ul>
+
+
 
     </div>
+    </section>
+
+    <!-- QNA -->
+    
+    <section id = "contact">
+      <div class = "sec_title">
+        CONTACT
+      </div>
+
+      <div class = "profile">
+        <img src="original.gif">
+      </div>
+      <ul>
+        <li><img src="email.png" class="click_img"></li>
+        <li><img src="github.png" class="click_img"></li>
+        <li><img src="steam.png" class="click_img"></li>
+        <li><img src="discord.jfif" class="click_img"></li>
+      </ul>
+      <!--<ul>
+        <li class = "click_text hidden">tn1078@kookmin.ac.kr</li>
+        <li class = "click_text hidden">https://github.com/kjsoo-1010</li>
+        <li class = "click_text hidden">1029306416</li>
+        <li class = "click_text hidden">#3522</li>
+      </ul>
+      -->
+    </section>
+    
+    <footer></footer>
+  </div>
+  <script src = "./blog.js"></script>
 </body>
+</html>
+
+
+
